@@ -14,7 +14,6 @@ public class LibraryApplication implements CommandLineRunner {
     private BookRepository bookRepository;
 
 	public LibraryApplication(AuthorRepository authorRepository,  BookRepository bookRepository) {
-		/* Tom konstruktor för framtiden. */
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
     }
@@ -37,10 +36,6 @@ public class LibraryApplication implements CommandLineRunner {
         book.setPublishing_year(2024);
         book.setCategory_id(1);
         bookRepository.save(book);
-    }
-
-	}
-		System.out.println("Välkommen till Bibliotek Malmö1");
 
         // Antalet böcker utlånade respektive ej utlånade på de olika biblioteken.
 
