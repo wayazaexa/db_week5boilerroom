@@ -56,7 +56,8 @@ CREATE TABLE Librarian (
 CREATE TABLE Loan (
     loan_id SERIAL PRIMARY KEY,
     start_date DATE NOT NULL DEFAULT CURRENT_DATE,
-    end_date DATE NOT NULL DEFAULT CURRENT_DATE + 14
+    end_date DATE NOT NULL DEFAULT CURRENT_DATE + 14,
+	status VARCHAR(20) NOT NULL DEFAULT 'ongoing'
 );
 
 CREATE TABLE Loan_Book_copy (
@@ -76,6 +77,7 @@ CREATE TABLE Member_Loan (
     loan_id INT NOT NULL REFERENCES Loan(loan_id),
     PRIMARY KEY (member_id, loan_id)
 );
+
 
 
 -- ===============================
@@ -178,12 +180,13 @@ INSERT INTO Member(name, email) VALUES
 -- ===============================
 -- LOANS
 -- ===============================
-INSERT INTO Loan(start_date, end_date) VALUES
-(CURRENT_DATE - 10, CURRENT_DATE + 4),
-(CURRENT_DATE - 5, CURRENT_DATE + 9),
-(CURRENT_DATE - 1, CURRENT_DATE + 13),
-(CURRENT_DATE - 20, CURRENT_DATE - 6), -- already late
-(CURRENT_DATE, CURRENT_DATE + 14);
+INSERT INTO Loan(start_date, end_date, status) VALUES
+(CURRENT_DATE - 10, CURRENT_DATE + 4, 'ongoing'),
+(CURRENT_DATE - 5, CURRENT_DATE + 9, 'ongoing'),
+(CURRENT_DATE - 1, CURRENT_DATE + 13, 'ongoing'),
+(CURRENT_DATE - 20, CURRENT_DATE - 6, 'returned'),
+(CURRENT_DATE - 20, CURRENT_DATE - 6, 'late'), -- already late
+(CURRENT_DATE, CURRENT_DATE + 14, 'ongoing');
 
 -- ===============================
 -- LOAN → BOOK COPIES
@@ -194,7 +197,8 @@ INSERT INTO Loan_Book_copy VALUES
 (2, 3),  -- loan 2: 1984
 (3, 8),  -- loan 3: Harry Potter 2
 (4, 5),  -- loan 4: Frankenstein
-(5, 6);  -- loan 5: The Hobbit
+(5, 6),  -- loan 5: The Hobbit
+(6, 10); -- loan 6: I, Robot
 
 -- ===============================
 -- MEMBER → LOAN
@@ -204,6 +208,6 @@ INSERT INTO Member_Loan VALUES
 (2, 2),
 (3, 3),
 (4, 4),
-(5, 5);
-
+(5, 5),
+(1, 6);
 
