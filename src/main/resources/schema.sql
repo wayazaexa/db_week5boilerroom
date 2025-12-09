@@ -43,7 +43,8 @@ CREATE TABLE Library (
 CREATE TABLE Book_copy (
     book_copy_id SERIAL PRIMARY KEY,
     quantity INT CONSTRAINT quantity_constraint CHECK (quantity >= 0) NOT NULL,
-    book_id INT NOT NULL REFERENCES Book(book_id)
+    book_id INT NOT NULL REFERENCES Book(book_id),
+    library_id INT NOT NULL REFERENCES Library(library_id)
 );
 
 CREATE TABLE Librarian (
